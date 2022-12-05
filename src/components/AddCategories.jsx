@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from "react-router-dom";
 import { apiCall } from '../api-call/api-call';
 import { useSnackbar } from "notistack"
+import { createCategoryUrl } from '../environment';
 
 function AddCategory() {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -18,7 +19,7 @@ function AddCategory() {
                 initialValues={initialValues}
                 // validationSchema={updateUserSchema}
                 onSubmit={(values) => {
-                    apiCall("post", "http://localhost:3000/categories/create", { category_name: values.name })
+                    apiCall("post", createCategoryUrl, { category_name: values.name })
                         .then((res) => {
                             enqueueSnackbar(JSON.stringify("Category created successfully"), {
                                 variant: "success",

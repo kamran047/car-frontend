@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { signupUrl } from '../environment';
 
 function Signup() {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -32,7 +33,7 @@ function Signup() {
                 initialValues={initialValues}
                 validationSchema={updateUserSchema}
                 onSubmit={(values) => {
-                    axios.post("http://localhost:3000/user/signup", { email: values.email, password: values.password })
+                    axios.post(signupUrl, { email: values.email, password: values.password })
                         .then(res => {
                             console.log("🚀 ~ file: Signup.jsx:38 ~ Signup ~ res.data", res.data)
                             if (res.data.statusCode == 201) {

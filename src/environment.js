@@ -1,0 +1,9 @@
+export const environment = "http://localhost:3000/";
+export const signupUrl = environment + "user/signup";
+export const loginUrl = environment + "user/login";
+export const createCategoryUrl = environment + "categories/create";
+export const getCategoriesUrl = environment + "categories/GetAll";
+export const createCarUrl = environment + "cars/create";
+export const getCarsUrl = environment + "cars/getAll";
+export const deleteCarUrl = environment + "cars/delete/";
+export const updateCarUrl = environment + "cars/update/";

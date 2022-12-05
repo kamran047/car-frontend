@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack';
 import { useNavigate } from "react-router-dom";
 import { setLocalStorage } from '../localStorage/localStorage';
 import * as yup from "yup";
+import { loginUrl } from '../environment';
 
 function Login() {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -31,7 +32,7 @@ function Login() {
                 initialValues={initialValues}
                 validationSchema={updateUserSchema}
                 onSubmit={(values) => {
-                    axios.post("http://localhost:3000/user/login", { email: values.email, password: values.password })
+                    axios.post(loginUrl, { email: values.email, password: values.password })
                         .then(res => {
                             enqueueSnackbar(JSON.stringify("Loggedin successfully"), {
                                 variant: "success",

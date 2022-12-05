@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from "react-router-dom";
 import { apiCall } from '../api-call/api-call';
+import { createCarUrl, getCategoriesUrl, updateCarUrl } from '../environment';
 
 function AddCar(props) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -18,7 +19,7 @@ function AddCar(props) {
     }
 
     useEffect(() => {
-        apiCall("get", "http://localhost:3000/categories/GetAll")
+        apiCall("get", getCategoriesUrl)
             .then(res => {
                 console.log(res)
                 setCategories(res.data.response)
@@ -45,7 +46,7 @@ function AddCar(props) {
                 // validationSchema={updateUserSchema}
                 onSubmit={(values) => {
                     props?.car == null ?
-                        apiCall("post", "http://localhost:3000/cars/create",
+                        apiCall("post", createCarUrl,
                             {
                                 category_id: selectedValue,
                                 color: values.color,
@@ -63,7 +64,7 @@ function AddCar(props) {
                                 props.closeModalFunction()
                             })
                             .catch(err => console.log(err))
-                        : apiCall("put", "http://localhost:3000/cars/update/" + props?.car?.id,
+                        : apiCall("put", updateCarUrl + props?.car?.id,
                             {
                                 category_id: selectedValue,
                                 color: values.color,

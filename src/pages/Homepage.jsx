@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { apiCall } from '../api-call/api-call';
 import AddCar from '../components/AddCar';
 import { deleteLocalStorage, getLocalStorage } from '../localStorage/localStorage';
+import { deleteCarUrl, getCarsUrl, updateCarUrl } from '../environment';
 
 function Homepage() {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -23,7 +24,7 @@ function Homepage() {
     })
 
     const getCars = () => {
-        apiCall("get", "http://localhost:3000/cars/GetAll")
+        apiCall("get", getCarsUrl)
             .then(res => {
                 console.log(res)
                 setCars(res.data.response)
@@ -32,7 +33,7 @@ function Homepage() {
     }
 
     const removeCar = (car) => {
-        apiCall("delete", "http://localhost:3000/cars/delete/" + car.id)
+        apiCall("delete", deleteCarUrl + car.id)
             .then(res => {
                 setCars(res.data.response)
             })
@@ -40,7 +41,7 @@ function Homepage() {
     }
 
     const handleEditCar = () => {
-        apiCall("put", "http://localhost:3000/cars/delete/" + car.id)
+        apiCall("put", updateCarUrl + car.id)
             .then(res => {
                 setCars(res.data.response)
             })
